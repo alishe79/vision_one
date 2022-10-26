@@ -1,6 +1,6 @@
 name: vision
 description: A new  plugin for offline  image labeling in flutter
-version: 0.0.4
+version: 0.0.5
 homepage: https://github.com/alishe79/vision_one.git
 
 environment:
