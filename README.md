@@ -21,12 +21,10 @@
 **Simply**
 
 ```dart
-// Vision plugin
-final vision = Vision();
 // image_picker plugin
 final ImagePicker picker = ImagePicker();
 // Initial vision
-var initialed = await _vision.initial();
+var initialed = await Vision.initial();
 // If successfully initialed, then you can use image labeling codes
 if (initialed){
   // Run Image labeling code's
@@ -36,20 +34,20 @@ if (initialed){
 **Image labeling code's**
 
 ```dart
-String jsonLabels = await _vision.runModelOnByteArray(uint8list, /** you can change confidence (Important) **/ 0.3);
+String jsonLabels = await Vision.runModelOnByteArray(uint8list, /** you can change confidence (Important) **/ 0.3);
 ```
 
 here maybe you need convert bytes to uint8list for e.g. code
 
 ```dart
-also you can get bytes from file image by using
+// also you can get bytes from file image by using
 var bytes = await _fileImage.readAsBytes();
 var uint8list = Uint8List.fromList(bytes.toList())
 ```
 
 Then run Image labeling code ...
 
-**_vision.runModelOnByteArray** is return json string items when confidence > 0.3, e.g.
+**Vision.runModelOnByteArray** is return json string items when confidence > 0.3, e.g.
 
 ```json
 [
@@ -134,15 +132,14 @@ import 'package:vision/vision.dart';
 now, use below code, just this.
 
 ```dart
-final _vision = Vision();
 final ImagePicker picker = ImagePicker();
 try {
-  var initialed = await _vision.initial();
+  var initialed = await Vision.initial();
   if(initialed){
     final XFile? image = await picker.pickImage(source: ImageSource.gallery);
     if (image != null){
       var bytes = await image.readAsBytes();
-      String jsonLabels = await _vision.runModelOnByteArray(Uint8List.fromList(bytes.toList()), 0.3);
+      String jsonLabels = await Vision.runModelOnByteArray(Uint8List.fromList(bytes.toList()), 0.3);
       var labels = List<Map<String, dynamic>>.from(json.decode(jsonLabels));
       if (kDebugMode){
         dev.log(labels.toString());
